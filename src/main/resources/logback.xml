@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<configuration scan="true" debug="true" >
+<!--    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>-->
+<!--    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />-->
+
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+<!--        <destination>35.193.14.173:5000</destination>-->
+        <remoteHost>35.193.14.173</remoteHost>
+        <port>5000</port>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"index_nam1e":"botoro", "app_name":"botoro", "city": "the city of nowhere", "environment": "${SDKMAN_DIR}"}</customFields>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="logstash"/>
+    </root>
+</configuration>
